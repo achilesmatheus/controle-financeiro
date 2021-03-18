@@ -1,0 +1,180 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #e5e7e9;
+  overflow: hidden;
+}
+
+h1,
+h3 {
+  text-align: center;
+}
+
+h3 {
+  padding-top: 10px;
+  width: 300px;
+  height: 80px;
+  margin: 0 auto;
+  background-color: white;
+  box-shadow: 0 2px 2px #bdc3c7;
+}
+
+.container {
+  width: 500px;
+  height: 100vh;
+  margin: 0 auto;
+}
+
+.block_values {
+  position: relative;
+  width: 300px;
+  height: 80px;
+  margin: 20px auto;
+  background-color: white;
+  box-shadow: 0 2px 2px #bdc3c7;
+}
+
+.block_values::after {
+  position: absolute;
+  content: "";
+  width: 50px;
+  height: 30px;
+  border-left: 1px solid black;
+  left: 50%;
+  top: 50%;
+  transform: translate(0, -50%);
+}
+
+.block_values p {
+  width: 150px;
+  color: black;
+  font-weight: bold;
+  text-align: center;
+  float: left;
+}
+
+span {
+  display: block;
+  margin-top: 15px;
+}
+
+.block_transaction {
+  width: 460px;
+  margin: 20px auto;
+}
+
+.block_transaction p::after {
+  content: "";
+  background-color: black;
+  width: auto;
+  height: 2px;
+  display: block;
+}
+
+.name input,
+.value input {
+  width: 100%;
+  height: 30px;
+  text-align: center;
+  margin-bottom: 20px;
+  border: none;
+  box-shadow: 0 2px 2px #bdc3c7;
+}
+
+.name label,
+.value label {
+  display: block;
+  width: 40px;
+}
+
+.block_transaction button {
+  display: block;
+  margin: 0 auto;
+  width: 300px;
+  height: 30px;
+  background-color: white;
+  border: 2px solid;
+  font-weight: bold;
+}
+
+.block_transaction button:active {
+  background-color: black;
+  color: white;
+  border: 4px solid white;
+}
+
+.transactions_list {
+  height: 100px;
+  overflow-y: auto;
+}
+
+.transactions_list ul {
+  /* background-color: white; */
+  padding: 0 20px;
+}
+
+.transactions_list span {
+  display: inline;
+  margin: 0;
+  float: right;
+}
+
+.transactions_list li {
+  background-color: white;
+  box-shadow: 0 2px 2px #bdc3c7;
+  height: 30px;
+  margin-bottom: 10px;
+  font-size: 15px;
+  list-style: none;
+  position: relative;
+  padding: 6px 6px 0 6px;
+}
+
+.transactions_list li:hover {
+  cursor: pointer;
+}
+
+span.delete {
+  display: none;
+}
+
+span.transaction_name {
+  float: left;
+}
+
+.transactions_list li:hover span.delete {
+  display: block;
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  position: absolute;
+  left: -20px;
+  width: 20px;
+  height: 20px;
+  background-color: red;
+  cursor: pointer;
+}
+
+div.name {
+  margin-right: 4%;
+  width: 48%;
+  float: left;
+}
+
+div.value {
+  width: 48%;
+  float: left;
+}
+
+.block_transaction_type {
+  width: 200px;
+  margin: 20px auto;
+}
