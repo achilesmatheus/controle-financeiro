@@ -96,10 +96,14 @@ const init = () => {
 }
 
 const clearInputs = (...inputs) => inputs.forEach(input => input.value = '')
+const isInputsEmpty = (...inputs) => inputs.some(input => input.value === '')
 
 handleClick = () => {
+  if (isInputsEmpty(inputName, inputValue)) return alert('Preencha os campos')
+
   const newTransaction = createTransaction();
   transactionsArray.push(newTransaction)
+
   insertIntoLocalStorage(transactionsArray)
   insertTransactionsIntoList(transactionsArray)
   updateValues(transactionsArray)
