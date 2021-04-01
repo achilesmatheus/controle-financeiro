@@ -10,14 +10,16 @@ const buttonAdd = document.querySelector("button");
 
 let transactionsArray = JSON.parse(localStorage.getItem('transactions')) || []
 
-const radioButtonIsChecked = radioButton => radioButton.checked
+const radioButtonIsChecked = radioButton => !!radioButton.checked
 
 const getSelectedRadioButton = () => {
   const radioButtons = document.querySelectorAll('input[type="radio"]')
+  let checkedRadio;
 
   radioButtons.forEach(radio => {
-    if (radioButtonIsChecked(radio)) return radio
+    if (radioButtonIsChecked(radio)) checkedRadio = radio
   })
+  return checkedRadio
 }
 
 const createTransaction = () => ({
@@ -25,6 +27,7 @@ const createTransaction = () => ({
   value: +inputValue.value,
   type: getSelectedRadioButton().value
 });
+
 
 const deleteTransaction = ({ target }) => {
   if (target.classList.contains('delete')) {
@@ -93,6 +96,8 @@ const init = () => {
 }
 
 handleClick = () => {
+  console.log(getSelectedRadioButton())
+
   const newTransaction = createTransaction();
   transactionsArray.push(newTransaction)
   insertIntoLocalStorage(transactionsArray)
