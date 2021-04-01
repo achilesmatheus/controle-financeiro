@@ -10,16 +10,15 @@ const buttonAdd = document.querySelector("button");
 
 let transactionsArray = JSON.parse(localStorage.getItem('transactions')) || []
 
+const radioButtonIsChecked = radioButton => radioButton.checked
+
 const getSelectedRadioButton = () => {
   const radioButtons = document.querySelectorAll('input[type="radio"]')
-  let checkedRadio = Object()
+  let checkedRadio = Element()
 
   radioButtons.forEach(radio => {
-    if (radio.checked) {
-      checkedRadio = radio
-    }
+    if (radioButtonIsChecked(radio)) return radio
   })
-  return checkedRadio
 }
 
 const createTransaction = () => ({
@@ -28,11 +27,14 @@ const createTransaction = () => ({
   type: getSelectedRadioButton().value
 });
 
-const deleteTransaction = (e) => {
-  if (e.target.classList.contains('delete')) {
-    const spanName = e.target.nextElementSibling
-    transactionsArray = transactionsArray.filter(transaction => transaction.name !== spanName)
-    e.target.parentElement.remove()
+const deleteTransaction = ({ target }) => {
+  if (target.classList.contains('delete')) {
+    const spanName = target.nextElementSibling
+    transactionsArray = transactionsArray
+      .filter(transaction => transaction.name !== spanName)
+
+    target.parentElement.remove()
+
     insertIntoLocalStorage(transactionsArray)
     updateValues(transactionsArray)
   }
@@ -63,9 +65,10 @@ const insertTransactionsIntoList = transactionsArray => {
   })
 };
 
-const formatTransactionValue = (transactionValue) => `R$ ${transactionValue.toFixed(2)}`;
+const formatedTransactionValue = transactionValue =>
+  `R$ ${transactionValue.toFixed(2)}`;
 
-const updateValues = (transactions) => {
+const updateValues = transactions => {
   const incomeValue = transactions
     .filter(transaction => transaction.type === 'income')
     .reduce((acc, transaction) => { return acc + transaction.value }, 0)
@@ -76,9 +79,9 @@ const updateValues = (transactions) => {
 
   const balanceValue = incomeValue + expenseValue
 
-  income.textContent = formatTransactionValue(incomeValue)
-  expense.textContent = formatTransactionValue(expenseValue)
-  balance.textContent = formatTransactionValue(balanceValue)
+  income.textContent = formatedTransactionValue(incomeValue)
+  expense.textContent = formatedTransactionValue(expenseValue)
+  balance.textContent = formatedTransactionValue(balanceValue)
 
 }
 
