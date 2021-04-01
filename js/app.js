@@ -4,8 +4,6 @@ const income = document.querySelector(".income");
 const transactionsList = document.querySelector(".transactions_list ul");
 const inputName = document.querySelector("#name");
 const inputValue = document.querySelector("#value");
-const inputIncome = document.querySelector("#value");
-const inputExpense = document.querySelector("#value");
 const buttonAdd = document.querySelector("button");
 
 let transactionsArray = JSON.parse(localStorage.getItem('transactions')) || []
@@ -33,7 +31,7 @@ const deleteTransaction = ({ target }) => {
   if (target.classList.contains('delete')) {
     const spanName = target.nextElementSibling
     transactionsArray = transactionsArray
-      .filter(transaction => transaction.name !== spanName)
+      .filter(transaction => transaction.name !== spanName.textContent)
 
     target.parentElement.remove()
 
@@ -87,22 +85,25 @@ const updateValues = transactions => {
 
 }
 
-const insertIntoLocalStorage = (transactions) => localStorage
-  .setItem("transactions", JSON.stringify(transactions));
+const insertIntoLocalStorage = transactions => {
+  localStorage
+    .setItem("transactions", JSON.stringify(transactions))
+};
 
 const init = () => {
   insertTransactionsIntoList(transactionsArray)
   updateValues(transactionsArray)
 }
 
-handleClick = () => {
-  console.log(getSelectedRadioButton())
+const clearInputs = (...inputs) => inputs.forEach(input => input.value = '')
 
+handleClick = () => {
   const newTransaction = createTransaction();
   transactionsArray.push(newTransaction)
   insertIntoLocalStorage(transactionsArray)
   insertTransactionsIntoList(transactionsArray)
   updateValues(transactionsArray)
+  clearInputs(inputName, inputValue)
 };
 
 init()
