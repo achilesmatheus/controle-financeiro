@@ -14,7 +14,6 @@ const radioButtonIsChecked = radioButton => radioButton.checked
 
 const getSelectedRadioButton = () => {
   const radioButtons = document.querySelectorAll('input[type="radio"]')
-  let checkedRadio = Element()
 
   radioButtons.forEach(radio => {
     if (radioButtonIsChecked(radio)) return radio
